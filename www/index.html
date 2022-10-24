@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>中转</title>
+    <link rel="shortcut icon" href="icon.jpg">
+    <script src="jquery.min.js"></script>
+    <style>
+
+        body {
+            background: url('data:image/png;base64,R0lGODlhQABAALP/AP/////z8/P///Pz8/Ph4e3t7eHz8+Hh4QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACwAAAAAQABAAEAE/xCAMiStU2IJDsCgplUFV3ojR35VuAkDCMtTUX52gXbeZg03oOrDkQgCuZ5PdVlqYCymIXOgGFbFYkswAQklPQ43OwxmDyhgrIsbXLvO9dmkE2FZtifFYtG9alU2QHuCHFVaZQcbcikdfSUxAjqKGmZ8klkUOjcXOI0SBheQGJuaKAVjeyo+KJSqUS2DGIdXeWRCMV41tzgeJaqkiENyA2OMMZ2Kv4K2bZVEQ9A3ZJ6katOwakcGaKYAxpI2gUuLIhklU0acYKjY54Rqa7HTAzueWbiUNbl5smZBLXZVyhWrWpRsptb4ITKryQhie0hYU8PwVyV6Wo4VJBFRxThoaP+KTBOgjCGcIJC4CNlDct+iQgPL2PmXaxWcDgEhMVT5pGSmb6sAxsKF4QoGLmlAfVBUs4uomXTSeGlRIB3IA7XMfZhST5yqHG8GAQglr4K9MGDimVBIBpWwYhcoGauUVANZrVs6yTkwhg2eU8S01ui3sGimdmugSGRWLtOSjgEziJTILxAXvStzWeXDAqkPL33RUOW46dAnyRxXfWGxwTTVt2YjC7x3jp/ZQnlgaBIrp85ehRp/vYHmY0ZZAwRcHoSGswgUzswJpv5Sj1SoZ32NriNOCN7aRS+oI9L1w1I9Iqe6KNqMEluLblE6AfyRztY0YGM5hXjl40S94a4Nxsf/ecGUt0kIR0BX00Ss8YJND5D8AkVd48UDUwqfieXQNYZJw0aERYRBECid0LZUYwe1ZA9JN0i1glCzOAZEFUqQo1ZkC41yYoJVMcQUJcFI1RFza2XQW4l1yYYaEfK1uKBqwTRF1yHH4GXCkmUREZYUN+nUx1KsfdaPkjUl85xNJ3wTQAej3NGFSumBgZV+FaSCzHCoQUQUcKdxZBY3ZtHIVJjePUSRHfyIwFSVfLoTkglVpGaLkqII0hpxqs1WhAEBXDMBfIJZuFsIc3xaSDmvUONEUK+4d51RNZElFSDusIEMI5+iEUgOBEFiT1NB6BbhMczYYkxlTaDowQ4vpjoZ/5rKNGWPd8GtwZWvmJlDp63E6TKaFq1y5q1zVLJpyRMTcKXeYQVdZOQ3fErmZI6qNiiCQ3noc68rXqkGwyn5lmPcfDkNIwY+0bFDHh0iOVKBVZoYMRdd0Ym1VbuSBEQVWum6mRFbUy3XTDwFnrEHVlDicgsjM3TbDA46VUnHUM0s05aLGRFc54gwM4XfBy2TVHKIiD0VDbwu2CSZISsgE5PBnrCo7w+sDQoyUil4QBKFE+gW5K2r7mO1f32JIY5fHlyxQ83nfRgmm0PY0wgIzKySTlfCiqutPvUAGRMqda5J2yQgeQIkfxarYJRjXCSXgm73xJnBcP4JY1qJY7FT65/Egnjd62oDmqNPHUtj3lhkbC3dNgV9vTeU6Il/E+no8dCoGRCYfKfgu2MFkMaQvih20Bo14nMoZ1X11WJL8mC5wW5GfjUSYc/ngdGIM1o0T4EKhaPOc6vfMkk3Xh7vsCOkz3otRfe5kAvfwDyfVgZlH+9eTpGW+FJFlHnp4bteMg1OPDU3Ii3OE9B7Cka+cYJzaUwDfHESQ4phjstUIAIAOw==');
+        
+        }
+        hr {
+        border: 0;
+        height: 1px;
+        background: #fff;
+        background-image: linear-gradient(to right, #aaa, #fff, #fff);
+        }
+        .toggle-button {
+            display: none;
+        }
+
+        .button-label {
+            position: relative;
+            display: inline-block;
+            width: 40px;
+            height: 20px;
+            background-color: #ccc;
+            box-shadow: #ccc 0px 0px 0px 2px;
+            border-radius: 30px;
+            overflow: hidden;
+        }
+
+        .circle {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: #fff;
+        }
+
+        .button-label .circle {
+            left: 0;
+            transition: all 0.1s;
+        }
+
+        .toggle-button:checked + label.button-label .circle {
+            left: 20px;
+        }
+
+        .toggle-button:checked + label.button-label {
+            background-color: #19e236;
+        }
+
+
+        .button-label-yellow {
+            position: relative;
+            display: inline-block;
+            width: 40px;
+            height: 20px;
+            background-color: #ccc;
+            box-shadow: #ccc 0px 0px 0px 2px;
+            border-radius: 30px;
+            overflow: hidden;
+        }
+
+
+        .button-label-yellow .circle {
+            left: 0;
+            transition: all 0.1s;
+        }
+
+        .toggle-button:checked + label.button-label-yellow .circle {
+            left: 20px;
+        }
+
+        .toggle-button:checked + label.button-label-yellow {
+            background-color: #b7c2a2;
+        }
+
+        input,
+        button {
+            border: none;
+            outline: none;
+        }
+
+        .tl-price-input {
+            width: 70%;
+            border: 1px solid #ccc;
+            padding: 7px 0;
+            background: #F4F4F7;
+            border-radius: 3px;
+            padding-left: 5px;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+            -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+            -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+            transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+            font-family:方正粗黑宋简体;
+        }
+
+        .tl-price-input:focus {
+            border-color: #263859;
+            outline: 0;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6)
+        }
+
+        .ant-btn {
+            line-height: 1.499;
+            position: relative;
+            display: inline-block;
+            font-weight: 400;
+            white-space: nowrap;
+            text-align: center;
+            background-image: none;
+            border: 1px solid transparent;
+            -webkit-box-shadow: 0 2px 0 rgba(0, 0, 0, 0.015);
+            box-shadow: 0 2px 0 rgba(0, 0, 0, 0.015);
+            cursor: pointer;
+            -webkit-transition: all .3s cubic-bezier(.645, .045, .355, 1);
+            transition: all .3s cubic-bezier(.645, .045, .355, 1);
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -ms-touch-action: manipulation;
+            touch-action: manipulation;
+            height: 28px;
+            padding: 0 15px;
+            font-size: 14px;
+            border-radius: 4px;
+            color: rgba(0, 0, 0, 0.65);
+            background-color: #fff;
+            border-color: #d9d9d9;
+        }
+
+        .ant-btn-primary {
+            color: #fff;
+            background-color: #1890ff;
+            border-color: #1890ff;
+            text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.12);
+            -webkit-box-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
+            box-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
+        }
+
+        .ant-btn-red {
+            color: #fff;
+            background-color: #17223b;
+            border-color: #706f6f;
+            text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.12);
+            -webkit-box-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
+            box-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
+        }
+
+        .scroll_ips {
+            white-space: nowrap; /* 父级元素中的内容不换行 */
+            height: 28px;
+            width: 100%;
+            /* overflow-x: scroll;
+            overflow:auto; */
+            overflow: hidden;
+            padding: 1px;
+            box-sizing: border-box;
+        }
+
+        .scroll_ips:hover {
+            overflow-x: auto;
+        }
+
+        .item_ip {
+            height: 100%;
+            width: 160px;
+            padding: 1px;
+            display: inline-block;
+            position: relative;
+            background: #17223b;
+            color: #fff;
+            text-align: center;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-left: 3px;
+        }
+
+        .item_ip:hover {
+            background: #111;
+        }
+
+        .item_ip_active {
+            height: 100%;
+            width: 160px;
+            padding: 1px;
+            display: inline-block;
+            position: relative;
+            background: #000;
+            color: #fff;
+            text-align: center;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-left: 3px;
+        }
+
+        .scroll_ips::-webkit-scrollbar-track {
+            background-color: #fff;
+        }
+
+        .scroll_ips::-webkit-scrollbar {
+            height: 10px;
+        }
+
+        .scroll_ips::-webkit-scrollbar-thumb {
+            background-color: #aaa;
+        }
+
+        .icon-red-dot {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: red;
+            right: -2px;
+            top: -2px;
+            border-radius: 50%;
+        }
+
+        .icon-green-dot {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #00ff00;
+            right: -2px;
+            top: -2px;
+            border-radius: 50%;
+        }
+
+        .scroll_container {
+            height: 100%;
+            width: 100%;
+            overflow-y: scroll;
+            padding: 10px;
+            box-sizing: border-box;
+            background: url('log.webp');
+        }
+
+        .scroll_dropdown {
+            height: 220px;
+            overflow-y: scroll;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        .scroll_dropdown::-webkit-scrollbar {
+            width: 0px;
+        }
+
+        .scroll_item_a {
+            width: 100%;
+            margin-top: 5px;
+            background-color: rgba(107, 119, 141, 0.5);
+            display: flex;
+            justify-content: left;
+            word-break: break-all;
+        }
+
+        .scroll_item_a_b {
+            width: 100%;
+            margin-top: 5px;
+            background-color: rgba(107, 119, 141, 0.8);
+            display: flex;
+            justify-content: left;
+            word-break: break-all;
+        }
+
+        .scroll_item {
+            width: 100%;
+            margin-top: 5px;
+            background-color: rgba(255, 255, 255, 0.3);
+            display: flex;
+            justify-content: left;
+            word-break: break-all;
+        }
+        .scroll_item_b {
+            width: 100%;
+            margin-top: 5px;
+            background-color: rgba(255, 255, 255, 0.8);
+            display: flex;
+            justify-content: left;
+            word-break: break-all;
+        }
+        .radioStyle {
+            display: inline-block;
+            user-select: none;
+            -webkit-user-seletct: none;
+            -moz-user-seletct: none;
+        }
+
+        .radioStyle input {
+            visibility: hidden;
+        }
+
+        .radioStyle input[type="checkbox"] + label {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .radioStyle input + label::before {
+            content: '';
+            position: absolute; /*父元素为label，针对父元素进行绝对定位*/
+            left: -24px;
+            width: 18px;
+            height: 18px;
+            border: 1px solid #999;
+            border-radius: 50%; /*圆角边框*/
+        }
+
+        .radioStyle input:checked + label::before {
+            box-shadow: 0 0 6px #333;
+        }
+
+        .radioStyle input:checked + label::after {
+            content: '';
+            position: absolute; /*针对label进行绝对定位*/
+            left: -20px;
+            top: 4px;
+            border-radius: 50%; /*设置圆角*/
+            width: 12px;
+            height: 12px;
+            background: #333;
+        }
+
+        #client2Server {
+            position: relative;
+            left: 20px;
+            display: inline-block;
+            border-radius: 50%; /*设置圆角*/
+            width: 16px;
+            height: 16px;
+            background: #f00;
+        }
+
+        .dropdown {
+            position: fixed;
+            width: 19%;
+            background-color: #FFF;
+            border: 1px solid #3b3753;
+            border-top: 0;
+            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+            z-index: 999;
+            padding: 0;
+            margin: 0;
+        }
+
+        .dropdown div {
+            display: block;
+            line-height: 1.42857;
+            padding: 0 6px;
+            min-height: 1.2em;
+            cursor: pointer;
+        }
+        
+        .dropdown div {
+            display: block;
+            line-height: 1.42857;
+            padding: 0 6px;
+            min-height: 1.2em;
+            cursor: pointer;
+        }
+
+        .item:hover {
+            background-color:rgba(107, 119, 141, 0.7);
+            color: #FFF;
+        }
+
+        .ddb {
+            position: absolute;
+            right: 2px;
+        }
+
+        .not-obvious {
+            color: rgba(0, 0, 0, 0.4);
+        }
+
+        .not-obvious:hover {
+            color: rgba(255, 255, 255, 0.9);
+        }
+    </style>
+</head>
+<body>
+<div style="width: 100%;">
+    <div class="scroll_ips" id="scroll_ips">
+        <div class="item_ip" id="item_ip-home" style="width: 30px;"><img style="margin-top: 4px;"
+                                                                         src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAA0klEQVQ4T6WSvQ3CMBCF3zcDHRVUtKyA2CG0FDAAgh7oQfRISLRkCTICG0DPEIcS2VF+iQUubMm+993dO6M/F9/0ZrZL34HsbFqtACfeOtG+DdIIqIh94kZIDdAi9pAjsCm2UgKY2UHSusPXC7DwMTnAzM6SloFDiYFZZnC6mdlNUk/SNBCQSHoDkQfMgauZWSBgJKkPJFUPggBArusCRK6iuOR8KMBnqrYWXMEvgKekQT5jV2qlghcwrP0DN86xpFMBMHH394IHK+DRCAgcYSnsA4UJVxFiRk78AAAAAElFTkSuQmCC">
+        </div>
+
+    </div>
+</div>
+<table width="100%">
+    <tr>
+        <td colspan="2">
+        </td>
+    </tr>
+    <tr>
+        <td id="td" style="width:100px;vertical-align:top;">
+            <h4>监听端口</h4>
+            <input id="serverPort" class="tl-price-input" type="text" placeholder="端口">
+            <br><br>
+            <div>
+                <div class="toggle-button-wrapper">
+                    <input type="checkbox" id="button-server" class="toggle-button" name="switch"
+                           onclick="serverClick()">
+                    <label for="button-server" class="button-label-yellow" id="clinet-color">
+                        <span class="circle"></span>
+                    </label>
+                </div>
+            </div>
+            <hr>
+            <h4>连接服务器</h4>
+            <div id="dropdown-aire">
+                <input id="ip" class="tl-price-input" type="text" placeholder="IP地址">
+                <div id="dropdown" class="dropdown scroll_dropdown">
+
+                </div>
+            </div>
+            <br>
+            <input id="port" class="tl-price-input" type="text" placeholder="端口">
+            <br><br>
+            <div>
+                <div class="toggle-button-wrapper">
+                    <input type="checkbox" id="button-client" class="toggle-button" name="switch"
+                           onclick="clientClick()">
+                    <label for="button-client" class="button-label">
+                        <span class="circle"></span>
+                    </label>
+                </div>
+            </div>
+        </td>
+        <td style="height:200px;width:400px;vertical-align:top;" id="log_container">
+            <div id="scroll_container-home" class="scroll_container"></div>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+
+        </td>
+        <td>
+            <div class="radioStyle">
+                <input type="checkbox" name="like" id="isHex" checked onclick="setIsHex()">
+                <label for="isHex">十六进制 </label>
+            </div>
+
+            <div class="radioStyle" style="margin-left: 10px;">
+                <input type="checkbox" name="like" id="isResend" checked onclick="setResend()">
+                <label for="isResend">是否转发</label>
+            </div>
+           
+
+            <button class="ant-btn ant-btn-red" onclick="clearLog()" title="清除当前连接交互日志"><img
+                    style="margin-top: 4px;"
+                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABZklEQVQ4T6XTP4jPYRwH8Ne7FJvBzOJKkbqyyMIVWQjFGZR/SaEwyZ/llH8jrgxSpw4DWVBWZoMymMgis8n60fPtubrOud/JZ3uePp/3n+f9eeI/K/86X1Uf8D3JgTY7EqCqtid535qr6gie4GuSsZEAVXUFt/AaD3EBO7EvyaslAarqOGbwDOPY2O3OJjk6Z31RC1W1A2+xCtO4jz243e8GRUne/AFQVSdwGavbY2ELvnSQR7iD84P8VnNSquogzqGxv8CNJJ+q6jSuYV1X1RRdwliStQNAVT3Hoc44hXben2R2HkGTf6Yre4eVSbYtBPiBFlWTuh4TSVrzUFW1uYM0oOtJpuZbmMRTrMDP3nC3Z38qyUQHacm0hDYl+bzYIz7GsU76AGfxEbuxq5PcS3Lxr3tQVRt6fG3gFw637cNLrMHWJN+Ws4kn0Zia95b9XkwmaSkNNfIvdN9XcXPh8LIBlvqxvwFRqHkRfyEeXAAAAABJRU5ErkJggg==">
+            </button>
+            <img id="client2ServerImg" src="icon.jpg" title="服务器连接状态" style="width: 20px; position: relative;left: 20px;top: 2px; display: inline-block;">
+            <div id="client2Server" title="服务器连接状态"></div>
+            <button id="closePage" class="ant-btn ant-btn-red" style="float: right; background-color: #ff6768;border-color: #ff6768;display: none;" title="关闭当前连接"
+                    onclick="removeScrollContainer()"><img style="margin-top: 4px;"
+                                                           src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAArUlEQVQ4T+WTvQ3CMBCFv7cLVViAjrAEFbsQJmAKGpYAhoCKJZDoH7rIkYzAyFFKTrLks32f7udZTDSV4m13wDLdXySF/2FFQG1iPcB2AxyBeWXgFVhLur1lYPsE7CSdK0GMAthugTbvRxGQmhhlhUW6XQJsJa2GDH8B+nLSwz7oDwFNzHnQSexH9eCbDmoAe+CRBT+TH2exFkkHxTHG59kAs4IS78AhV+rkz/QCp2KIEeTkxK4AAAAASUVORK5CYII=">
+            </button>
+        </td>
+    </tr>
+    <tr>
+        <td>
+
+        </td>
+        <td>
+            <!-- <input id="content" class="tl-price-input" type="text"> -->
+            <textarea id="textarea" class="tl-price-input" style="
+                resize: none;
+                border: none;
+                outline: none;
+                font-family:方正粗黑宋简体;
+                background: url('data:image/png;base64,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');
+                width: 80%;
+                height: 50px;
+              "></textarea>
+              <table style="width: 19%;float:right;">
+                <tr>
+                    <td>
+                        <button id="sendClient" class="ant-btn ant-btn-red" style="display: none; font-size: 15px;background-color: #fff;border-color: #000;color: #000;" onclick="send2Client()"><img
+                            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABdklEQVQ4T6WTMUsDQRCF31w6f4Ra2ORug4HYiIWNjYWiqVXQXyAqWCSgFkELMYW2Qe0Ei6iFoILamAiWO4sBTxCsLLTQ5oojI4FLWA5PlGy5+963M29nCV0u6tKPDkApdQOgwMy1/0A7AM/z9gG8EZESkUVjjP8XkF1BHcAMgDUAswAqQRAs+b7/+RvIBpwBmGBmUkpdARiLjCVmLiZBbEAFwIKIHBhj5pVStwBGI+NXlM9uHNQBZDKZLRFZjQR5Zq4qpVqBDlumZxEpGmOO2nt2BcsAti3xQLPZfHUc5w7AUOzmexEpGGOu7VeYI6JDS1hl5nw2m+0Pw/AEwKB1dkxEZa113W5hXETOYzetM/OG53kuEV0Q0Y7Wumxr7BZaZT7EQxKRSQAfRDTNzCuJIabT6b5UKvXSFojIHhG1ZiBDRI8Aalrr00RALpfrCYLgyXGcTa31XluolLoE0BuG4Uij0XhPBCQNiuu6HhGVjDFTP2m6/o3fNjeREUnCAZ0AAAAASUVORK5CYII=">终端
+                    </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button id="sendServer" class="ant-btn ant-btn-red" style="display: none; font-size: 15px;" onclick="send2Server()"><img
+                            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABX0lEQVQ4T6XTvavOYRzH8dcnqygyyWSwnOmkk4eT7iTLke34FwxWg0lCLKyK0SKE4VgkIc8DImVRNgaDyVm/uk7Xffo5zuGOb/2G6+Hz/n2+D1f8Z+Rf9VW1AZsmBnTBbuzv3058WRMwEOzpgtnu9jueoGkXlwEDQfvLWLQO3/AST/EgyeuqmsNdzKSqTmEX9mI9vnbBCzxL8nxlnarqFjYnGTXAB2zF6SZM0oRLUVUbcQbN/mySxao6iHs4nGRhKYWqOo8TuI1z3WZbt/2HOJ7kTb97DduTzLT1sAbTHTLfDXzChSSXB4724TGOJrnyC2BwaYRt+IwtSe4Mzq5iOsnUeO+3NlbVfJKbVbWAQ7iU5FhVNcuvejoX/wQoHMGNXqzm6D3e4QCmkvz4G6Cd32+Vxg6c7W5OJmldWY7VUmgO3mIuSZuJcUtHSR6tnInVAG2wrif5OMlDm/gxrQX7CUhqh+fcPhQ6AAAAAElFTkSuQmCC">平台
+                    </button>
+                    </td>
+                </tr>
+              </table>
+            
+          
+
+        </td>
+    </tr>
+</table>
+<script>
+    function setResend() {
+        var onoffswitch = document.getElementById("isResend");
+        if (onoffswitch.checked) {
+            $("#client2Server").css('display', 'inline-block');
+            $("#client2ServerImg").css('display', 'inline-block');
+            var suf = suffix;
+            if(suf=='') {
+                suf = "home";
+            }
+            client2ServerStatusCharge(suf);
+            setResendSwitch(true);
+        } else {
+            $("#client2Server").css('display', 'none');
+            $("#client2ServerImg").css('display', 'none');
+            setResendSwitch(false);
+        }
+    }
+    function setIsHex() {
+        var onoffswitch = document.getElementById("isHex");
+        if (onoffswitch.checked) {
+            setHexSwitch(true);
+        } else {
+            setHexSwitch(false);
+        }
+    }
+    function send2Client() {
+        if(suffix){
+            var value = $("#textarea").val().trim;
+            var onoffswitch = document.getElementById("isHex");
+            if (onoffswitch.checked) {
+                if(value.length%2!=0){
+                    alertFunc("16进制校验失败,请检查数据位数");
+                    return;
+                }
+            }
+            sendToClient(suffix, value);
+        }
+    }
+
+    function send2Server() {
+        if(suffix) {
+           var arrIp = suffix.split("_");
+           suffix="";
+           for (let i = 0; i < arrIp.length -1; i++) {
+                const element = arrIp[i];
+                suffix+=element+".";
+           }
+           suffix=suffix.substring(0,suffix.length-1);
+           suffix+=arrIp[arrIp.length-1]
+        }
+        var value = $("#textarea").val().trim;
+        var onoffswitch = document.getElementById("isHex");
+        if (onoffswitch.checked) {
+            if(value.length%2!=0){
+                alertFunc("16进制校验失败,请检查数据位数");
+                return;
+            }
+        }
+        sendToServer(suffix, value);
+    }
+    var isBox = false; // 定义一个触发焦点事件的开关，默认为不开启状态 || 也可以给input设置一个属性，来判断
+    $(function () {
+        $(".dropdown").hide();
+        $("#ip").focus(function () { // input绑定焦点事件，触发时打开焦点开关
+            fillIpAndPort();
+            $(".dropdown").show();
+            isBox = true;
+        });
+        $("#ip").blur(function () { // input失去焦点时通过焦点开关状态判断鼠标所在区域
+            if (isBox == true) return false;
+            $(".dropdown").hide();
+        });
+        $("#dropdown-aire").mousemove(function () { // 鼠标进入input-box区域内打开焦点开关
+            isBox = true;
+        });
+        $("#dropdown-aire").mouseout(function () { // 鼠标离开input-box区域内关闭焦点开关
+            isBox = false;
+        });
+
+
+    })
+
+    $('#item_ip-home').click(function () {
+        suffix = '';
+        $('#item_ip-home').css('background', '#000');
+        $('#scroll_container-home').css('display', 'block');
+        $('#sendClient').css('display', 'none');
+        $('#closePage').css('display', 'none');
+        for (let i = 0; i < ipArr.length; i++) {
+            var ip = ipArr[i];
+            $('#item_ip-' + ip).css('background', '#3b3753');
+            $('#scroll_container-' + ip).css('display', 'none')
+        }
+        var suf="home";
+        client2ServerStatusCharge(suf);
+    })
+
+    function sendIpAndPort() {
+        var ip = $('#ip').val();
+        var port = $('#port').val();
+        if (ip == '') {
+            alertFunc("请填写中转IP地址")
+            return
+        }
+        if (port == '') {
+            alertFunc("请填写中转端口")
+            return
+        }
+        getIpAndPort(ip, port);
+    }
+
+    function clientClick() {
+        var onoffswitch = document.getElementById("button-client");
+
+        if (onoffswitch.checked) {
+            onoffswitch.checked = false;
+            var ip = $('#ip').val();
+            if (ip == '') {
+                alertFunc("IP地址不能为空")
+                return
+            }
+            var port = $('#port').val();
+            if (port == '') {
+                alertFunc("端口不能为空")
+                return
+            }
+            createClient(ip, port)
+        } else {
+            closeClient();
+        }
+    }
+
+
+    function serverClick() {
+        var onoffswitch = document.getElementById("button-server");
+        if (onoffswitch.checked) {
+            var serverPort = $('#serverPort').val()
+            if (serverPort == '') {
+                onoffswitch.checked = false;
+                alertFunc("端口不能为空")
+                return
+            }
+            createServer(serverPort)
+        } else {
+            closeServer()
+        }
+    }
+
+    function clientSwitch(open) {
+        var onoffswitch = document.getElementById("button-client");
+        if (open) {
+            onoffswitch.checked = true;
+        } else {
+            onoffswitch.checked = false;
+        }
+    }
+
+    function serverSwitch(open) {
+        var onoffswitch = document.getElementById("button-server");
+        if (open) {
+            onoffswitch.checked = true;
+
+        } else {
+            onoffswitch.checked = false;
+        }
+    }
+
+
+    function clientConn() {
+        $("#clinet-color").removeClass("button-label-yellow");
+        $("#clinet-color").addClass("button-label");
+    }
+
+    function clientDisconn() {
+        $("#clinet-color").removeClass("button-label");
+        $("#clinet-color").addClass("button-label-yellow");
+    }
+
+    function dotConn(suf) {
+        $("#dot-" + suf).addClass("icon-green-dot");
+        $("#dot-" + suf).removeClass("icon-red-dot");
+        if(suf == suffix) {
+            $('#sendClient').css('display', 'block');
+        }
+    }
+
+    function dotDisConn(suf) {
+        $("#dot-" + suf).addClass("icon-red-dot");
+        $("#dot-" + suf).removeClass("icon-green-dot");
+        $('#sendClient').css('display', 'none');
+    }
+
+    function clearLog() {
+        if (suffix == '') {
+            $('#scroll_container-home').html('');
+        } else {
+            $('#scroll_container-' + suffix).html('');
+        }
+
+    }
+
+    var suffix = '';
+    var logCountMap = new Map();
+    var isEndMap = new Map();
+    var client2ServerStatusMap = new Map();
+    var ipArr = [];
+
+    Array.prototype.remove = function (val) {
+        var index = this.indexOf(val);
+        if (index > -1) {
+            this.splice(index, 1);
+        }
+    };
+    function addLog(content, server, suf, contentByte) {
+        var logCount = 0;
+        if (logCountMap.has(suf)) {
+            logCount = logCountMap.get(suf);
+        }
+        logCount++;
+        logCountMap.set(suf, logCount);
+        if (server) {
+            $('#scroll_container-' + suf).append('<div id="log-' + logCount + '" class="scroll_item_a">\n' +
+                '                    <span style="white-space:pre-wrap;">' + detailEscape(content,contentByte) + '</span>\n' +
+                '                </div>')
+        } else {
+            $('#scroll_container-' + suf).append('<div id="log-' + logCount + '" class="scroll_item">\n' +
+                '                    <span style="white-space:pre-wrap;">' + detailEscape(content,contentByte) + '</span>\n' +
+                '                </div>')
+        }
+        var isEnd = true;
+        if (isEndMap.has(suf)) {
+            isEnd = isEndMap.get(suf);
+        }
+        if (isEnd) {
+            document.querySelector("#log-" + logCount).scrollIntoView();
+        }
+
+    }
+
+    function detailEscape(content,contentByte){
+        if(contentByte){
+            var onoffswitch = document.getElementById("isHex");
+            if (onoffswitch.checked) {
+                return content + contentByte;
+            } else{
+                return content + escapeHTMLString(hexCharCodeToStr(contentByte,1));
+            }
+        }else{
+            return content
+        }
+    }
+
+    //把HTML格式的字符串转义成实体格式字符串
+    function escapeHTMLString(str) {
+        str = str.replace(/</g,'&lt;');
+        str = str.replace(/>/g,'&gt;');
+        return str;
+    }
+
+            //十六进制转ASCII码
+            function hexCharCodeToStr(hexCharCodeStr, type) {
+            var trimedStr = hexCharCodeStr.trim();
+            //  var rawStr = trimedStr.substr(0, 2).toLowerCase() === "0x" ? trimedStr.substr(2) : trimedStr;
+            var rawStr = trimedStr;
+            var len = rawStr.length;
+            if (len % 2 !== 0) {
+                //alert("存在非法字符!");
+                if (len > 0) {
+                    len--;
+                    rawStr.substr(0, len - 1)
+                }
+            }
+            var curCharCode;
+            var resultStr = [];
+            for (var i = 0; i < len; i = i + 2) {
+                curCharCode = parseInt(rawStr.substr(i, 2), 16);
+                if (type == 1) {
+                    resultStr.push(String.fromCharCode(curCharCode));
+                } else if (type == 2) {
+                    resultStr.push(curCharCode.toString(2));
+                } else if (type == 10) {
+                    resultStr.push(curCharCode);
+                }
+            }
+            return resultStr.join('');
+        }
+
+    function addLocalLog(content, server, suf) {
+        var logCount = 0;
+        if (logCountMap.has(suf)) {
+            logCount = logCountMap.get(suf);
+        }
+        logCount++;
+        logCountMap.set(suf, logCount);
+        if (server) {
+            $('#scroll_container-' + suf).append('<div id="log-' + logCount + '" class="scroll_item_a_b">\n' +
+                '                    <span>' + content + '</span>\n' +
+                '                </div>')
+        } else {
+            $('#scroll_container-' + suf).append('<div id="log-' + logCount + '" class="scroll_item_b">\n' +
+                '                    <span>' + content + '</span>\n' +
+                '                </div>')
+        }
+        var isEnd = true;
+        if (isEndMap.has(suf)) {
+            isEnd = isEndMap.get(suf);
+        }
+        if (isEnd) {
+            document.querySelector("#log-" + logCount).scrollIntoView();
+        }
+
+    }
+
+    function client2ServerStatusSwitch(suf, isTrue) {
+        client2ServerStatusMap.set(suf, isTrue);
+        if(suffix == suf || (suffix==''&& suf =="home")) {
+            client2ServerStatusCharge(suf);
+        }
+    }
+
+    function isScrollBottom(obj) {
+        if (obj.scrollHeight - obj.scrollTop - obj.clientHeight < 50) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function removeScrollContainer() {
+        if (suffix == '') {
+            return;
+        }
+        $("#scroll_container-" + suffix).remove();
+        $("#item_ip-" + suffix).remove();
+        closeDotClient(suffix);
+        var index = ipArr.indexOf(suffix);
+        if (index > -1) {
+            ipArr.splice(index, 1);
+            if (index != 0) {
+                suffix = ipArr[index - 1];
+                $('#item_ip-' + suffix).css('background', '#000');
+                $('#scroll_container-' + suffix).css('display', 'block');
+                $('#closePage').css('display', 'block');
+            } else if (ipArr.length != 0) {
+                suffix = ipArr[0];
+                $('#item_ip-' + suffix).css('background', '#000');
+                $('#scroll_container-' + suffix).css('display', 'block');
+                $('#closePage').css('display', 'block');
+            } else {
+                suffix = '' 
+                $('#item_ip-home').css('background', '#000');
+                $('#scroll_container-home').css('display', 'block');
+                $('#closePage').css('display', 'none');
+            }
+            var suf = suffix;
+            if(suf=='') {
+                suf ="home"
+                $('#sendClient').css('display', 'none');
+            } else{
+                var classArr =$('#dot-'+ suf).attr('class');
+                if(classArr.indexOf("icon-red-dot")>-1){
+                    $('#sendClient').css('display', 'none');
+                } else{
+                    $('#sendClient').css('display', 'block');
+                }
+            }
+            client2ServerStatusCharge(suf);
+      
+        }
+    }
+    $('#scroll_container-home').scroll(function (e) {
+            if (isScrollBottom(this)) {
+                // 滚动到底端了TODO加载内容 
+                //加载数据
+                isEndMap.set("home", true)
+            } else {
+                // 没有滚动到底端TODO 其他处理  
+                isEndMap.set("home", false)
+            }
+        });
+    function client2ServerStatusCharge(suf) {
+        if(client2ServerStatusMap.has(suf)) {
+                if(client2ServerStatusMap.get(suf)) {
+                    $("#client2Server").css('background', '#0f0');
+                    $('#sendServer').css('display', 'block');
+                } else{
+                    $("#client2Server").css('background', '#f00');
+                    $('#sendServer').css('display', 'none');
+                }
+            } else {
+                $("#client2Server").css('background', '#f00');
+                $('#sendServer').css('display', 'none');
+            }
+    }
+
+    function addScrollContainer(suf, address) {
+        if (document.getElementById("item_ip-" + suf)) {
+            //存在 
+            dotConn(suf);
+            return
+        }
+        ipArr.push(suf);
+        $("#log_container").append(' <div id="scroll_container-' + suf + '" class="scroll_container" style="display:none"></div>');
+        $("#scroll_ips").append('<div class="item_ip" id="item_ip-' + suf + '">' + address + '<span class="icon-green-dot" id="dot-' + suf + '"></span></div>')
+        /**
+         *绑定滚动事件
+         */
+        $('#scroll_container-' + suf).scroll(function (e) {
+            if (isScrollBottom(this)) {
+                // 滚动到底端了TODO加载内容 
+                //加载数据
+                isEndMap.set(suf, true)
+            } else {
+                // 没有滚动到底端TODO 其他处理  
+                isEndMap.set(suf, false)
+            }
+        });
+        $('#item_ip-' + suf).click(function () {
+            suffix = suf;
+            client2ServerStatusCharge(suf);
+            for (let i = 0; i < ipArr.length; i++) {
+                var ip = ipArr[i];
+                if (ip == suf) {
+                    $('#item_ip-' + ip).css('background', '#000');
+                    $('#scroll_container-' + ip).css('display', 'block')
+                } else {
+                    $('#item_ip-' + ip).css('background', '#3b3753');
+                    $('#scroll_container-' + ip).css('display', 'none')
+                }
+
+            }
+            $('#item_ip-home').css('background', '#3b3753');
+            $('#scroll_container-home').css('display', 'none');
+            $('#closePage').css('display', 'block');
+           var classArr =$('#dot-'+ suf).attr('class');
+            if(suf!='home' && classArr.indexOf("icon-red-dot")>-1){
+                $('#sendClient').css('display', 'none');
+            } else{
+                $('#sendClient').css('display', 'block');
+            }
+        })
+        if (ipArr.length == 1) {
+            suffix = suf;
+            $('#item_ip-' + suf).css('background', '#000');
+            $('#scroll_container-' + suf).css('display', 'block')
+            $('#item_ip-home').css('background', '#3b3753');
+            $('#scroll_container-home').css('display', 'none')
+        }
+    }
+
+    function alertFunc(content) {
+        if (content) {
+            $("#scroll_ips").append('<div class="web_notice"\n' +
+    '     style="position: fixed;top: 0;left: 0;width: 100%;height: 100%;background: rgba(0,0,0,0.3);z-index: 99999;">\n' +
+    '    <div style="position: fixed;top: 50%;left: 50%;width: 350px; height:200px;background: #FFF;transform: translate(-50%, -50%);border-radius: 20px;padding: 25px 30px;">\n' +
+    '        <h5 style="text-align: center;font-size: 15px;color: #555;">提示</h5>\n' +
+    '        <div style="font-size: 18px;margin-top: 16px;line-height: 30px;color: #000;text-align: center;font-weight: bold;">'+content+'</div>\n' +
+    '        <a style="display: block;cursor:pointer;background: #263859;color: #FFF;text-align: center;font-weight: bold;font-size: 16px;line-height: 50px;margin: 0 auto;margin-top: 40px;border-radius: 20px;width: 80%;"\n' +
+    '           onclick="javascript:document.querySelector(\'.web_notice\').remove()">我知道了</a></div>\n' +
+    '</div>');
+        }
+    }
+
+    function fillIpItem(json) {
+        var arr = JSON.parse(json);
+        $('#dropdown').html('');
+        if (arr) {
+            for (let i = 0; i < arr.length; i++) {
+                const obj = arr[i];
+                $('#dropdown').append(' <div class="item" index="' + i + '"><div><span id="name-' + i + '">' + obj.name
+                    + '</span> <a id="updateBut-' + i + '" class="ddb not-obvious" index="' + i + '">备注</a></div><div><span class="not-obvious" id="ip-' + i + '">' +
+                    obj.ip + ':' + obj.port + '</span><a id="del-' + i + '" class="ddb not-obvious">删除</a></div></div>')
+                $("#del-" + i).click(function (e) {
+                    e.stopPropagation();   //表示阻止向父元素冒泡
+                    e.preventDefault();     //阻止 方法阻止元素发生默认的行为（例如，当点击提交按钮时阻止对表单的提交或者a标签）。
+                    appendIp(obj.ip, obj.port, '', true);
+                    setTimeout(fillIpAndPort, 100);
+                });
+                $("#updateBut-" + i).click(function (e) {
+                    e.stopPropagation();   //表示阻止向父元素冒泡
+                    e.preventDefault();     //阻止 方法阻止元素发生默认的行为（例如，当点击提交按钮时阻止对表单的提交或者a标签）。
+                    var index = e.currentTarget.attributes.index.value;
+                    var txt = $.trim($('#name-' + index).text());
+                    var input = $('<input type="text" class="input" style="width: 120px" value="' + txt + '" maxlength="20" />');
+                    $('#name-' + index).html(input)
+                    //文本框失去焦点后提交内容，重新变为文本
+                    input.click(function (e) {
+                        e.stopPropagation();   //表示阻止向父元素冒泡
+                        e.preventDefault();     //阻止 方法阻止元素发生默认的行为（例如，当点击提交按钮时阻止对表单的提交或者a标签）。
+                    });
+                    var save = $('<a class="ddb not-obvious">保存</a>');
+                    $('#name-' + index).append(save);
+                    $('#updateBut-' + index).remove();
+                    input.keydown(function () {
+                        if (window.event.keyCode == 13) {
+                            //如果发生了按下回车键事件，回车键对应的编号是13
+                            var newtxt = input.val();
+                            newtxt = widthCheck(newtxt, 20)
+                            appendIp(obj.ip, obj.port, newtxt, false);
+                            setTimeout(fillIpAndPort, 100);
+                        }
+                        var newtxt = input.val();
+                        if (newtxt.length > 10) {
+                            input.val(widthCheck(newtxt, 20))
+                        }
+                    });
+                    save.click(function (e) {
+                        e.stopPropagation();   //表示阻止向父元素冒泡
+                        e.preventDefault();     //阻止 方法阻止元素发生默认的行为（例如，当点击提交按钮时阻止对表单的提交或者a标签）。
+                        var newtxt = input.val();
+                        newtxt = widthCheck(newtxt, 20)
+                        appendIp(obj.ip, obj.port, newtxt, false);
+                        setTimeout(fillIpAndPort, 100);
+
+                    })
+                });
+
+            }
+            $("#dropdown").find('.item').each(function () { // 传值给input，同时关闭焦点开关
+                $(this).click(function (e) {
+                    isBox = false;
+                    var index = e.currentTarget.attributes.index.value;
+                    var txt = $.trim($('#ip-' + index).text());
+                    var ip = txt.split(":")[0];
+                    var port = txt.split(":")[1];
+                    $("#ip").val(ip);
+                    $("#port").val(port);
+                    $(".dropdown").hide();
+                })
+            })
+        }
+
+    }
+
+    function widthCheck(str, len) {// 限制输入框输入的字符数
+        let temp = 0;
+        for (let i = 0; i < str.length; i++) {
+            if (/[\u4e00-\u9fa5]/.test(str[i])) {
+                temp += 2;
+            } else {
+                temp++;
+            }
+            if (temp > len) {
+                str = str.substr(0, i);
+            }
+        }
+        return str;
+    }
+
+    $(function () {
+        fillIpAndPort();
+    })
+</script>
+
+</body>
+</html>
